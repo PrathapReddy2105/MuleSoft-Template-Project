@@ -1,0 +1,16 @@
+#%RAML 1.0
+title: xxx xxx API
+version: v1.0
+baseUri: https://devapi/xxx-xxx-api
+
+/self-ping:
+  get:
+    responses:
+        200:
+          body:
+            application/json:
+              example: |
+                  {
+                    "api_name": "xxx-xxx-API",
+                    "ping_status": "OK"
+                  }

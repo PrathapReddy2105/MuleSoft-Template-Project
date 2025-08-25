@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:anypoint-mq="http://www.mulesoft.org/schema/mule/anypoint-mq" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:sap="http://www.mulesoft.org/schema/mule/sap"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/current/mule-sap.xsd
+http://www.mulesoft.org/schema/mule/anypoint-mq http://www.mulesoft.org/schema/mule/anypoint-mq/current/mule-anypoint-mq.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<http:listener-config name="http-listener-config" doc:name="HTTP Listener config" doc:id="e2b4e6cf-abe3-47b6-8aa8-5be92930539e" >
+		<http:listener-connection host="0.0.0.0" port="${http.listner.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="4c26e6c7-5058-4197-8230-feabc8fe2d29" file="config/common.yaml" />
+	<configuration-properties doc:name="Configuration properties" doc:id="60a8ceff-f8d7-4009-b653-63ea1642912a" file="config/${mule.env}.yaml" />
+<json-logger:config name="Agilent_JSON_Logger_Config" doc:name="Agilent JSON Logger Config" doc:id="4dc92f14-b08c-4758-be18-abf8ef2d7b0d" environment="${mule.env}" />
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="64ce7be8-7031-4bd9-94e2-de9398fccb5d" >
+		<salesforce:basic-connection username="${sfdc.username}" password="${secure::sfdc.password}" securityToken="${secure::sfdc.token}" url="${sfdc.url}" />
+	</salesforce:sfdc-config>
+	<sap:sap-config name="SAP_Config" doc:name="SAP Config" doc:id="a6954076-ccdb-4129-9f4a-98db09a9be58" >
+		<sap:simple-connection-provider-connection username="${sap.username}" password="${secure::sap.password}" systemNumber="${sap.systemnumber}" client="${sap.clientid}" applicationServerHost="${sap.host}" />
+	</sap:sap-config>
+<apikit:config outboundHeadersMapName="outboundHeadersMapName" httpStatusVarName="httpStatus" doc:name="Router" doc:id="0b111530-3838-49a2-a98b-d428ae241667" name="apikitrouter" parser="RAML" api="api\api.raml"/>
+	<anypoint-mq:config name="Anypoint_MQ_Config" doc:name="Anypoint MQ Config" doc:id="bc3c672f-3104-4b9b-9160-fb66606131da" >
+		<anypoint-mq:connection url="${mq.url}" clientId="${mq.clientid}" clientSecret="${secure::mq.clientsecret}"/>
+	</anypoint-mq:config>
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="565ec09f-0569-4c13-af76-e895038a21d5" file="config\secure-${mule.env}.yaml" key="${encryption.key}"/>
+	
+</mule>

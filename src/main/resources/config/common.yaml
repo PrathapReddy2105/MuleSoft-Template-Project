@@ -1,0 +1,6 @@
+json:
+  logger:
+    application:
+      name: "changeme"
+      version: "1.0"
+

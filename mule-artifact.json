@@ -1,0 +1,5 @@
+{
+    "minMuleVersion": "4.6.0",
+    "javaSpecificationVersions": ["17"],
+    "secureProperties": ["secure-local.yaml","secure-dev.yaml","secure-qa.yaml","secure-uat.yaml","secure-prod.yaml"]
+}

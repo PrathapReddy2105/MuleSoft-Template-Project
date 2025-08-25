@@ -1,0 +1,11 @@
+sap:
+  password: ""
+ 
+sfdc:
+  password: ""
+  token: ""
+ 
+  
+mq:
+  clientsecret: ""
+  

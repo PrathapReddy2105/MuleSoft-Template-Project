@@ -1,0 +1,23 @@
+http:
+  listner:
+    port: "8081"
+
+sfdc:
+  username: ""
+  url: ""
+
+sap:
+  username: ""
+  systemnumber: ""
+  clientid: ""
+  host: ""
+  gateway:
+    host: ""
+    service: ""
+  programid: ""
+  connectioncount: ""
+ 
+mq:
+  url: ""
+  clientid: ""
+  
